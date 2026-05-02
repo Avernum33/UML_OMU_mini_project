@@ -1,48 +1,14 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="15.1">
-  <zoom_level>8</zoom_level>
-
-  <!-- ============================================================ -->
-  <!--  PATTERN 1 : OBSERVER                                        -->
-  <!-- ============================================================ -->
-  <element>
-    <id>UMLFrame</id>
-    <coordinates><x>10</x><y>10</y><w>510</w><h>360</h></coordinates>
-    <panel_attributes>«Pattern: Observer»</panel_attributes>
-    <additional_attributes/>
-  </element>
-
-  <!-- MenuSubject interface -->
-  <element>
-    <id>UMLClass</id>
-    <coordinates><x>20</x><y>40</y><w>210</w><h>110</h></coordinates>
-    <panel_attributes>&lt;&lt;interface&gt;&gt;
+<diagram program="umletino" version="15.1"><zoom_level>8</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLFrame</id><coordinates><x>0</x><y>0</y><w>510</w><h>360</h></coordinates><panel_attributes>«Pattern: Observer»</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>8</x><y>32</y><w>210</w><h>110</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
 MenuSubject
 --
 --
 + attach(o: MenuObserver): void
 + detach(o: MenuObserver): void
-+ notifyObservers(): void</panel_attributes>
-    <additional_attributes/>
-  </element>
-
-  <!-- MenuObserver interface -->
-  <element>
-    <id>UMLClass</id>
-    <coordinates><x>280</x><y>40</y><w>210</w><h>90</h></coordinates>
-    <panel_attributes>&lt;&lt;interface&gt;&gt;
++ notifyObservers(): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>272</x><y>32</y><w>210</w><h>90</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
 MenuObserver
 --
 --
-+ update(menu: Menu): void</panel_attributes>
-    <additional_attributes/>
-  </element>
-
-  <!-- AdminSystem (implements MenuSubject) -->
-  <element>
-    <id>UMLClass</id>
-    <coordinates><x>20</x><y>200</y><w>220</w><h>150</h></coordinates>
-    <panel_attributes>AdminSystem
++ update(menu: Menu): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>8</x><y>192</y><w>220</w><h>150</h></coordinates><panel_attributes>AdminSystem
 --
 - observers: List&lt;MenuObserver&gt;
 - menu: Menu
@@ -52,15 +18,7 @@ MenuObserver
 + detach(o: MenuObserver): void
 + notifyObservers(): void
 + updatePrice(id, p): void
-+ updateAvailability(id, b): void</panel_attributes>
-    <additional_attributes/>
-  </element>
-
-  <!-- Kiosk (implements MenuObserver) -->
-  <element>
-    <id>UMLClass</id>
-    <coordinates><x>280</x><y>175</y><w>220</w><h>180</h></coordinates>
-    <panel_attributes>Kiosk
++ updateAvailability(id, b): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>272</x><y>160</y><w>220</w><h>180</h></coordinates><panel_attributes>Kiosk
 --
 - kioskId: String
 - location: String
@@ -70,78 +28,20 @@ MenuObserver
 + update(menu: Menu): void
 + displayMenu(): void
 + processOrder(): void
-+ refreshLocalMenu(): void</panel_attributes>
-    <additional_attributes/>
-  </element>
-
-  <!-- AdminSystem implements MenuSubject (dashed + hollow arrow) -->
-  <element>
-    <id>Relation</id>
-    <coordinates><x>120</x><y>140</y><w>30</w><h>70</h></coordinates>
-    <panel_attributes>lt=.&lt;&lt;</panel_attributes>
-    <additional_attributes>10;60;10;10</additional_attributes>
-  </element>
-
-  <!-- Kiosk implements MenuObserver -->
-  <element>
-    <id>Relation</id>
-    <coordinates><x>380</x><y>120</y><w>30</w><h>65</h></coordinates>
-    <panel_attributes>lt=.&lt;&lt;</panel_attributes>
-    <additional_attributes>10;60;10;10</additional_attributes>
-  </element>
-
-  <!-- AdminSystem observes many Kiosk -->
-  <element>
-    <id>Relation</id>
-    <coordinates><x>230</x><y>265</y><w>60</w><h>30</h></coordinates>
-    <panel_attributes>lt=->
-0..*</panel_attributes>
-    <additional_attributes>10;10;50;10</additional_attributes>
-  </element>
-
-  <!-- ============================================================ -->
-  <!--  PATTERN 2 : STRATEGY                                        -->
-  <!-- ============================================================ -->
-  <element>
-    <id>UMLFrame</id>
-    <coordinates><x>10</x><y>390</y><w>510</w><h>320</h></coordinates>
-    <panel_attributes>«Pattern: Strategy»</panel_attributes>
-    <additional_attributes/>
-  </element>
-
-  <!-- PaymentStrategy interface -->
-  <element>
-    <id>UMLClass</id>
-    <coordinates><x>160</x><y>415</y><w>200</w><h>90</h></coordinates>
-    <panel_attributes>&lt;&lt;interface&gt;&gt;
++ refreshLocalMenu(): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>224</x><y>232</y><w>64</w><h>32</h></coordinates><panel_attributes>lt=-&gt;
+0..*</panel_attributes><additional_attributes>10;20;60;20</additional_attributes></element><element><id>UMLFrame</id><coordinates><x>0</x><y>376</y><w>510</w><h>320</h></coordinates><panel_attributes>«Pattern: Strategy»</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>152</x><y>400</y><w>200</w><h>90</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
 PaymentStrategy
 --
 --
 + pay(amount: double): boolean
-+ getDescription(): String</panel_attributes>
-    <additional_attributes/>
-  </element>
-
-  <!-- APCardPayment -->
-  <element>
-    <id>UMLClass</id>
-    <coordinates><x>20</x><y>560</y><w>210</w><h>130</h></coordinates>
-    <panel_attributes>APCardPayment
++ getDescription(): String</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>8</x><y>552</y><w>210</w><h>130</h></coordinates><panel_attributes>APCardPayment
 --
 - cardId: String
 - balance: double
 --
 + pay(amount: double): boolean
 + deductBalance(a: double): void
-+ getDescription(): String</panel_attributes>
-    <additional_attributes/>
-  </element>
-
-  <!-- QRCodePayment (future extension) -->
-  <element>
-    <id>UMLClass</id>
-    <coordinates><x>280</x><y>560</y><w>210</w><h>130</h></coordinates>
-    <panel_attributes>«future»
++ getDescription(): String</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>248</x><y>552</y><w>210</w><h>130</h></coordinates><panel_attributes>«future»
 QRCodePayment
 --
 - qrToken: String
@@ -149,50 +49,8 @@ QRCodePayment
 --
 + pay(amount: double): boolean
 + generateQR(): String
-+ getDescription(): String</panel_attributes>
-    <additional_attributes/>
-  </element>
-
-  <!-- APCardPayment implements PaymentStrategy -->
-  <element>
-    <id>Relation</id>
-    <coordinates><x>120</x><y>495</y><w>110</w><h>75</h></coordinates>
-    <panel_attributes>lt=.&lt;&lt;</panel_attributes>
-    <additional_attributes>90;70;10;10</additional_attributes>
-  </element>
-
-  <!-- QRCodePayment implements PaymentStrategy -->
-  <element>
-    <id>Relation</id>
-    <coordinates><x>295</x><y>495</y><w>100</w><h>75</h></coordinates>
-    <panel_attributes>lt=.&lt;&lt;</panel_attributes>
-    <additional_attributes>10;70;80;10</additional_attributes>
-  </element>
-
-  <!-- Kiosk uses PaymentStrategy (dependency) -->
-  <element>
-    <id>Relation</id>
-    <coordinates><x>370</x><y>345</y><w>110</w><h>80</h></coordinates>
-    <panel_attributes>lt=.>
-uses</panel_attributes>
-    <additional_attributes>50;10;50;70</additional_attributes>
-  </element>
-
-  <!-- ============================================================ -->
-  <!--  PATTERN 3 : SINGLETON                                       -->
-  <!-- ============================================================ -->
-  <element>
-    <id>UMLFrame</id>
-    <coordinates><x>550</x><y>10</y><w>230</w><h>430</h></coordinates>
-    <panel_attributes>«Pattern: Singleton»</panel_attributes>
-    <additional_attributes/>
-  </element>
-
-  <!-- MenuManager Singleton -->
-  <element>
-    <id>UMLClass</id>
-    <coordinates><x>560</x><y>40</y><w>210</w><h>190</h></coordinates>
-    <panel_attributes>«singleton»
++ getDescription(): String</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>304</x><y>336</y><w>224</w><h>408</h></coordinates><panel_attributes>lt=-&gt;
+creates</panel_attributes><additional_attributes>220;10;220;460;10;460;10;490</additional_attributes></element><element><id>UMLFrame</id><coordinates><x>536</x><y>0</y><w>230</w><h>430</h></coordinates><panel_attributes>«Pattern: Singleton»</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>552</x><y>32</y><w>210</w><h>190</h></coordinates><panel_attributes>«singleton»
 MenuManager
 --
 - instance: MenuManager {static}
@@ -204,24 +62,8 @@ MenuManager
 + updateMenu(m: Menu): void
 + broadcast(): void
 + registerKiosk(k: Kiosk): void
-+ unregisterKiosk(k: Kiosk): void</panel_attributes>
-    <additional_attributes/>
-  </element>
-
-  <!-- self-reference (singleton) -->
-  <element>
-    <id>Relation</id>
-    <coordinates><x>740</x><y>50</y><w>60</w><h>80</h></coordinates>
-    <panel_attributes>lt=.>
-instance</panel_attributes>
-    <additional_attributes>10;10;50;10;50;60;10;60</additional_attributes>
-  </element>
-
-  <!-- TransactionLogger Singleton -->
-  <element>
-    <id>UMLClass</id>
-    <coordinates><x>560</x><y>280</y><w>210</w><h>150</h></coordinates>
-    <panel_attributes>«singleton»
++ unregisterKiosk(k: Kiosk): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>752</x><y>40</y><w>64</w><h>64</h></coordinates><panel_attributes>lt=.&gt;
+1</panel_attributes><additional_attributes>10;10;50;10;50;60;10;60</additional_attributes></element><element><id>UMLClass</id><coordinates><x>552</x><y>272</y><w>210</w><h>150</h></coordinates><panel_attributes>«singleton»
 TransactionLogger
 --
 - instance: TransactionLogger {static}
@@ -230,28 +72,8 @@ TransactionLogger
 + getInstance(): TransactionLogger {static}
 + log(order: Order): void
 + getLogs(kioskId: String): List
-+ exportLogs(): void</panel_attributes>
-    <additional_attributes/>
-  </element>
-
-  <!-- MenuManager --> Menu (manages) -->
-  <element>
-    <id>Relation</id>
-    <coordinates><x>560</x><y>170</y><w>60</w><h>40</h></coordinates>
-    <panel_attributes>lt=->
-manages</panel_attributes>
-    <additional_attributes>50;10;10;30</additional_attributes>
-  </element>
-
-  <!-- ============================================================ -->
-  <!--  SHARED CORE CLASSES (bottom)                                -->
-  <!-- ============================================================ -->
-
-  <!-- Menu -->
-  <element>
-    <id>UMLClass</id>
-    <coordinates><x>10</x><y>740</y><w>200</w><h>130</h></coordinates>
-    <panel_attributes>Menu
++ exportLogs(): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>488</x><y>176</y><w>80</w><h>32</h></coordinates><panel_attributes>lt=-&gt;
+manages</panel_attributes><additional_attributes>80;20;10;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>552</x><y>576</y><w>200</w><h>130</h></coordinates><panel_attributes>Menu
 --
 - menuId: String
 - products: List&lt;Product&gt;
@@ -260,15 +82,7 @@ manages</panel_attributes>
 + addProduct(p: Product): void
 + removeProduct(id: String): void
 + getProducts(): List&lt;Product&gt;
-+ findById(id): Product</panel_attributes>
-    <additional_attributes/>
-  </element>
-
-  <!-- Order -->
-  <element>
-    <id>UMLClass</id>
-    <coordinates><x>230</x><y>740</y><w>200</w><h>130</h></coordinates>
-    <panel_attributes>Order
++ findById(id): Product</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>216</x><y>728</y><w>200</w><h>130</h></coordinates><panel_attributes>Order
 --
 - orderId: String
 - items: List&lt;OrderItem&gt;
@@ -277,15 +91,7 @@ manages</panel_attributes>
 - userId: String
 --
 + submit(): void
-+ calculateTotal(): double</panel_attributes>
-    <additional_attributes/>
-  </element>
-
-  <!-- Product (abstract) -->
-  <element>
-    <id>UMLClass</id>
-    <coordinates><x>450</x><y>740</y><w>200</w><h>150</h></coordinates>
-    <panel_attributes>/Product/
++ calculateTotal(): double</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>440</x><y>728</y><w>200</w><h>150</h></coordinates><panel_attributes>/Product/
 --
 - productId: String
 - name: String
@@ -294,15 +100,7 @@ manages</panel_attributes>
 --
 /+ getDetails(): String/
 + setPrice(p: double): void
-+ setAvailable(b: boolean): void</panel_attributes>
-    <additional_attributes/>
-  </element>
-
-  <!-- Drink -->
-  <element>
-    <id>UMLClass</id>
-    <coordinates><x>390</x><y>920</y><w>180</w><h>110</h></coordinates>
-    <panel_attributes>Drink
++ setAvailable(b: boolean): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>376</x><y>912</y><w>180</w><h>110</h></coordinates><panel_attributes>Drink
 --
 - size: String
 - sugarLevel: String
@@ -310,66 +108,19 @@ manages</panel_attributes>
 - iceLevel: String
 --
 + customise(): void
-+ getDetails(): String</panel_attributes>
-    <additional_attributes/>
-  </element>
-
-  <!-- Snack -->
-  <element>
-    <id>UMLClass</id>
-    <coordinates><x>590</x><y>920</y><w>180</w><h>110</h></coordinates>
-    <panel_attributes>Snack
++ getDetails(): String</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>576</x><y>912</y><w>180</w><h>110</h></coordinates><panel_attributes>Snack
 --
 - type: String
 - ingredients: List&lt;String&gt;
 - dressingChoice: String
 --
 + addIngredient(i: String): void
-+ getDetails(): String</panel_attributes>
-    <additional_attributes/>
-  </element>
++ getDetails(): String</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>104</x><y>136</y><w>88</w><h>72</h></coordinates><panel_attributes>lt=.&gt;
+&lt;&lt;implements&gt;&gt;</panel_attributes><additional_attributes>10;70;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>376</x><y>112</y><w>88</w><h>64</h></coordinates><panel_attributes>lt=.&gt;
+&lt;&lt;implements&gt;&gt;</panel_attributes><additional_attributes>10;60;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>296</x><y>336</y><w>40</w><h>80</h></coordinates><panel_attributes>lt=-&gt;
 
-  <!-- Product <|-- Drink -->
-  <element>
-    <id>Relation</id>
-    <coordinates><x>480</x><y>880</y><w>50</w><h>50</h></coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10;40;40;10</additional_attributes>
-  </element>
 
-  <!-- Product <|-- Snack -->
-  <element>
-    <id>Relation</id>
-    <coordinates><x>600</x><y>880</y><w>90</w><h>50</h></coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>80;40;10;10</additional_attributes>
-  </element>
-
-  <!-- Kiosk creates Order -->
-  <element>
-    <id>Relation</id>
-    <coordinates><x>310</x><y>345</y><w>60</w><h>410</h></coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
-creates</panel_attributes>
-    <additional_attributes>50;10;10;400</additional_attributes>
-  </element>
-
-  <!-- AdminSystem manages Menu -->
-  <element>
-    <id>Relation</id>
-    <coordinates><x>100</x><y>340</y><w>40</w><h>410</h></coordinates>
-    <panel_attributes>lt=->
-manages</panel_attributes>
-    <additional_attributes>10;10;10;400</additional_attributes>
-  </element>
-
-  <!-- TransactionLogger logs Order -->
-  <element>
-    <id>Relation</id>
-    <coordinates><x>330</x><y>740</y><w>250</w><h>40</h></coordinates>
-    <panel_attributes>lt=.>
-logged by</panel_attributes>
-    <additional_attributes>10;20;240;20</additional_attributes>
-  </element>
-
-</diagram>
+uses</panel_attributes><additional_attributes>10;10;10;80</additional_attributes></element><element><id>Relation</id><coordinates><x>288</x><y>480</y><w>88</w><h>88</h></coordinates><panel_attributes>lt=.&gt;
+&lt;&lt;implements&gt;&gt;</panel_attributes><additional_attributes>10;90;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>168</x><y>480</y><w>88</w><h>88</h></coordinates><panel_attributes>lt=.&gt;
+&lt;&lt;implements&gt;&gt;</panel_attributes><additional_attributes>10;90;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>496</x><y>872</y><w>24</w><h>56</h></coordinates><panel_attributes>lt=-&gt;&gt;</panel_attributes><additional_attributes>10;50;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>608</x><y>872</y><w>24</w><h>56</h></coordinates><panel_attributes>lt=-&gt;&gt;</panel_attributes><additional_attributes>10;50;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>648</x><y>416</y><w>32</w><h>176</h></coordinates><panel_attributes>lt=.&gt;&gt;
+1</panel_attributes><additional_attributes>10;200;10;10</additional_attributes></element></diagram>
