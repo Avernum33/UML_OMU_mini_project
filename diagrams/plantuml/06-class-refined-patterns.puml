@@ -1,0 +1,119 @@
+@startuml refined-class-diagram-patterns
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+
+package "patterns.singleton" {
+  class CentralCatalog <<Singleton>> {
+    - instance: CentralCatalog
+    - products: ConcurrentMap<String, Product>
+    - observers: List<CatalogObserver>
+    + getInstance(): CentralCatalog
+    + saveProduct(product: Product): void
+    + updateAvailability(productId: String, status: ProductStatus): void
+    + findProduct(productId: String): Optional<Product>
+    + listAvailable(): List<Product>
+    + registerObserver(observer: CatalogObserver): void
+    - publish(event: CatalogEvent): void
+  }
+}
+
+package "patterns.observer" {
+  interface CatalogObserver <<Observer>> {
+    + onCatalogChanged(event: CatalogEvent): void
+  }
+
+  class CatalogEvent {
+    - productId: String
+    - product: Product
+    - eventType: CatalogEventType
+  }
+
+  class KioskMenuCache <<ConcreteObserver>> {
+    - kioskId: String
+    - cachedProducts: Map<String, Product>
+    + onCatalogChanged(event: CatalogEvent): void
+    + listAvailable(): List<Product>
+  }
+
+  enum CatalogEventType {
+    PRODUCT_ADDED
+    PRODUCT_UPDATED
+    PRODUCT_UNAVAILABLE
+  }
+}
+
+package "patterns.factory" {
+  interface ProductFactory <<Factory Method>> {
+    + create(request: ProductRequest): Product
+  }
+
+  class DrinkFactory <<ConcreteCreator>> {
+    + create(request: ProductRequest): Drink
+  }
+
+  class SnackFactory <<ConcreteCreator>> {
+    + create(request: ProductRequest): Snack
+  }
+
+  class ProductFactoryProvider {
+    + factoryFor(type: ProductType): ProductFactory
+  }
+
+  class ProductRequest {
+    - productId: String
+    - name: String
+    - type: ProductType
+    - basePrice: Money
+    - supportedOptions: List<String>
+  }
+}
+
+package "domain" {
+  abstract class Product
+  class Drink
+  class Snack
+  class Order
+  class OrderItem
+  class Customization
+  class User
+  class APCard
+  enum ProductType
+  enum ProductStatus
+}
+
+package "service" {
+  class AdminStaffSystem
+  class OrderService
+  class PaymentService
+  class TransactionLogger
+  class Kiosk
+}
+
+Product <|-- Drink
+Product <|-- Snack
+ProductFactory <|.. DrinkFactory
+ProductFactory <|.. SnackFactory
+ProductFactoryProvider --> ProductFactory
+ProductRequest --> ProductType
+DrinkFactory --> Drink
+SnackFactory --> Snack
+
+CentralCatalog --> Product
+CentralCatalog o-- CatalogObserver
+CentralCatalog --> CatalogEvent
+CatalogEvent --> Product
+CatalogEvent --> CatalogEventType
+KioskMenuCache ..|> CatalogObserver
+KioskMenuCache --> Product
+
+AdminStaffSystem --> CentralCatalog
+AdminStaffSystem --> ProductFactoryProvider
+Kiosk --> KioskMenuCache
+OrderService --> PaymentService
+OrderService --> TransactionLogger
+Order "1" o-- "1..*" OrderItem
+OrderItem --> Product
+OrderItem o-- Customization
+User o-- APCard
+@enduml
+

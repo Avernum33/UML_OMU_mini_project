@@ -1,0 +1,19 @@
+@startuml sequence-observer-catalog-sync
+skinparam shadowing false
+autonumber
+
+actor "Admin Staff" as Admin
+participant "AdminStaffSystem" as AdminSystem
+participant "CentralCatalog\n<<Singleton>>" as Catalog
+participant "KioskMenuCache\n<<Observer>>" as Cache
+
+Admin -> AdminSystem : mark product unavailable
+AdminSystem -> Catalog : updateAvailability(productId, UNAVAILABLE)
+Catalog -> Catalog : build CatalogEvent
+Catalog -> Cache : onCatalogChanged(event)
+Cache -> Cache : refresh cached product snapshot
+Cache --> Catalog : observer completed
+Catalog --> AdminSystem : product updated
+AdminSystem --> Admin : success
+@enduml
+

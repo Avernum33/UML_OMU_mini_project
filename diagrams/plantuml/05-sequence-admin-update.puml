@@ -1,0 +1,24 @@
+@startuml sequence-admin-update
+skinparam shadowing false
+autonumber
+
+actor "Admin Staff" as Admin
+participant "AdminStaffSystem" as AdminSystem
+participant "CentralCatalog" as Catalog
+participant "KioskMenuCache #1" as Cache1
+participant "KioskMenuCache #2" as Cache2
+participant "KioskMenuCache #5" as Cache5
+
+Admin -> AdminSystem : change price or availability
+AdminSystem -> Catalog : updateProduct(productId, price, status)
+Catalog -> Catalog : save central product snapshot
+Catalog -> Cache1 : onCatalogChanged(event)
+Catalog -> Cache2 : onCatalogChanged(event)
+Catalog -> Cache5 : onCatalogChanged(event)
+Cache1 --> Catalog : cache refreshed
+Cache2 --> Catalog : cache refreshed
+Cache5 --> Catalog : cache refreshed
+Catalog --> AdminSystem : update accepted
+AdminSystem --> Admin : confirmation
+@enduml
+

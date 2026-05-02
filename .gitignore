@@ -1,0 +1,12 @@
+out/
+target/
+build/
+.gradle/
+*.class
+*.jar
+*.log
+*.tmp
+.idea/
+.vscode/
+node_modules/
+

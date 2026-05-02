@@ -1,0 +1,21 @@
+@startuml sequence-factory-product-creation
+skinparam shadowing false
+autonumber
+
+actor "Admin Staff" as Admin
+participant "AdminStaffSystem" as AdminSystem
+participant "ProductFactoryProvider" as Provider
+participant "DrinkFactory\n<<Factory Method>>" as DrinkFactory
+participant "CentralCatalog\n<<Singleton>>" as Catalog
+
+Admin -> AdminSystem : add new drink request
+AdminSystem -> Provider : factoryFor(DRINK)
+Provider --> AdminSystem : DrinkFactory
+AdminSystem -> DrinkFactory : create(request)
+DrinkFactory -> DrinkFactory : validate drink options
+DrinkFactory --> AdminSystem : Drink product
+AdminSystem -> Catalog : saveProduct(drink)
+Catalog --> AdminSystem : product saved
+AdminSystem --> Admin : product available on kiosks
+@enduml
+

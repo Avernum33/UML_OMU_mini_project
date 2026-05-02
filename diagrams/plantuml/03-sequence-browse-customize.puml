@@ -1,0 +1,26 @@
+@startuml sequence-browse-customize
+skinparam shadowing false
+autonumber
+
+actor Customer
+participant "Kiosk UI" as UI
+participant "Kiosk" as Kiosk
+participant "KioskMenuCache" as Cache
+participant "Order" as Order
+
+Customer -> UI : swipe AP card
+UI -> Kiosk : identifyUser(cardNumber)
+Kiosk --> UI : user + balance
+
+Customer -> UI : request menu
+UI -> Kiosk : browseMenu()
+Kiosk -> Cache : listAvailable()
+Cache --> Kiosk : products
+Kiosk --> UI : available products
+
+Customer -> UI : select product and options
+UI -> Order : addItem(product, quantity, customizations)
+Order --> UI : item subtotal
+UI --> Customer : show updated order summary
+@enduml
+

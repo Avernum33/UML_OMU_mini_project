@@ -1,0 +1,123 @@
+@startuml initial-class-diagram
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+
+package "domain" {
+  class User {
+    - userId: String
+    - fullName: String
+    - role: UserRole
+    - card: APCard
+  }
+
+  enum UserRole {
+    STUDENT
+    STAFF
+  }
+
+  class APCard {
+    - cardNumber: String
+    - balance: Money
+    + deduct(amount: Money): void
+  }
+
+  abstract class Product {
+    - productId: String
+    - name: String
+    - basePrice: Money
+    - status: ProductStatus
+    + isAvailable(): boolean
+  }
+
+  class Drink
+  class Snack
+
+  enum ProductStatus {
+    AVAILABLE
+    UNAVAILABLE
+  }
+
+  class Customization {
+    - name: String
+    - value: String
+    - priceAdjustment: Money
+  }
+
+  class Order {
+    - orderId: String
+    - status: OrderStatus
+    + total(): Money
+  }
+
+  class OrderItem {
+    - quantity: int
+    + subtotal(): Money
+  }
+
+  enum OrderStatus {
+    DRAFT
+    PAID
+    SENT_TO_PREPARATION
+    CANCELLED
+  }
+
+  class Transaction {
+    - transactionId: String
+    - amount: Money
+    - createdAt: DateTime
+  }
+}
+
+package "services" {
+  class Kiosk {
+    - kioskId: String
+    + browseMenu(): List<Product>
+    + submitOrder(order: Order): Order
+  }
+
+  class ProductCatalog {
+    + listAvailableProducts(): List<Product>
+    + updateProduct(product: Product): void
+  }
+
+  class PaymentService {
+    + charge(card: APCard, amount: Money): Transaction
+  }
+
+  class OrderService {
+    + placeOrder(user: User, items: List<OrderItem>): Order
+  }
+
+  class TransactionLogger {
+    + log(transaction: Transaction): void
+  }
+
+  class OrderNotificationSystem {
+    + notify(order: Order): void
+  }
+
+  class AdminStaffSystem {
+    + updateAvailability(productId: String, status: ProductStatus): void
+    + updatePrice(productId: String, price: Money): void
+  }
+}
+
+User "1" o-- "1" APCard
+User "1" -- "0..*" Order
+Product <|-- Drink
+Product <|-- Snack
+Order "1" o-- "1..*" OrderItem
+OrderItem "1" --> "1" Product
+OrderItem "0..*" o-- "0..*" Customization
+Order "1" --> "0..1" Transaction
+
+Kiosk --> ProductCatalog
+Kiosk --> OrderService
+OrderService --> PaymentService
+OrderService --> OrderNotificationSystem
+OrderService --> TransactionLogger
+ProductCatalog --> Product
+PaymentService --> APCard
+AdminStaffSystem --> ProductCatalog
+@enduml
+

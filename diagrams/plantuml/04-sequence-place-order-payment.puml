@@ -1,0 +1,29 @@
+@startuml sequence-place-order-payment
+skinparam shadowing false
+autonumber
+
+actor Customer
+participant "Kiosk UI" as UI
+participant "Kiosk" as Kiosk
+participant "OrderService" as Orders
+participant "PaymentService" as Payment
+participant "APCard" as Card
+participant "TransactionLogger" as Logger
+participant "SnackBoothOrderDisplay" as Display
+
+Customer -> UI : confirm order
+UI -> Kiosk : submitOrder(user, items)
+Kiosk -> Orders : placeOrder(user, items)
+Orders -> Orders : calculate total
+Orders -> Payment : charge(user, total)
+Payment -> Card : deduct(total)
+Card --> Payment : balance updated
+Payment --> Orders : transaction
+Orders -> Logger : log(transaction)
+Orders -> Display : notify(order)
+Display --> Orders : accepted
+Orders --> Kiosk : paid order
+Kiosk --> UI : order number and remaining balance
+UI --> Customer : confirmation
+@enduml
+

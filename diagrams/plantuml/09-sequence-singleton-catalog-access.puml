@@ -1,0 +1,18 @@
+@startuml sequence-singleton-catalog-access
+skinparam shadowing false
+autonumber
+
+participant "Kiosk #1" as K1
+participant "Kiosk #2" as K2
+participant "CentralCatalog\n<<Singleton>>" as Catalog
+
+K1 -> Catalog : getInstance()
+Catalog --> K1 : shared instance
+K2 -> Catalog : getInstance()
+Catalog --> K2 : same shared instance
+K1 -> Catalog : listAvailable()
+Catalog --> K1 : current product snapshot
+K2 -> Catalog : findProduct(productId)
+Catalog --> K2 : same central data source
+@enduml
+
