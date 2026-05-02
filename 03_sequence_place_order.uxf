@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>8</zoom_level>
+
+  <!-- Title note -->
+  <element>
+    <id>UMLNote</id>
+    <coordinates><x>220</x><y>0</y><w>280</w><h>30</h></coordinates>
+    <panel_attributes>SD1 – Place Order</panel_attributes>
+    <additional_attributes/>
+  </element>
+
+  <!-- ===== LIFELINE HEADS ===== -->
+  <element>
+    <id>UMLObject</id>
+    <coordinates><x>20</x><y>40</y><w>110</w><h>40</h></coordinates>
+    <panel_attributes>:User</panel_attributes>
+    <additional_attributes/>
+  </element>
+
+  <element>
+    <id>UMLObject</id>
+    <coordinates><x>170</x><y>40</y><w>110</w><h>40</h></coordinates>
+    <panel_attributes>:Kiosk</panel_attributes>
+    <additional_attributes/>
+  </element>
+
+  <element>
+    <id>UMLObject</id>
+    <coordinates><x>320</x><y>40</y><w>110</w><h>40</h></coordinates>
+    <panel_attributes>:Menu</panel_attributes>
+    <additional_attributes/>
+  </element>
+
+  <element>
+    <id>UMLObject</id>
+    <coordinates><x>470</x><y>40</y><w>110</w><h>40</h></coordinates>
+    <panel_attributes>:Order</panel_attributes>
+    <additional_attributes/>
+  </element>
+
+  <element>
+    <id>UMLObject</id>
+    <coordinates><x>610</x><y>40</y><w>150</w><h>40</h></coordinates>
+    <panel_attributes>:PaymentProcessor</panel_attributes>
+    <additional_attributes/>
+  </element>
+
+  <!-- ===== LIFELINES ===== -->
+  <element>
+    <id>SequenceDiagram</id>
+    <coordinates><x>75</x><y>80</y><w>10</w><h>580</h></coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>SequenceDiagram</id>
+    <coordinates><x>225</x><y>80</y><w>10</w><h>580</h></coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>SequenceDiagram</id>
+    <coordinates><x>375</x><y>80</y><w>10</w><h>580</h></coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>SequenceDiagram</id>
+    <coordinates><x>525</x><y>80</y><w>10</w><h>580</h></coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>SequenceDiagram</id>
+    <coordinates><x>685</x><y>80</y><w>10</w><h>580</h></coordinates>
+    <panel_attributes>lt=.</panel_attributes>
+    <additional_attributes/>
+  </element>
+
+  <!-- ===== MESSAGES ===== -->
+
+  <!-- 1: swipeCard -->
+  <element>
+    <id>Relation</id>
+    <coordinates><x>75</x><y>110</y><w>160</w><h>30</h></coordinates>
+    <panel_attributes>lt=->
+1: swipeCard(cardId)</panel_attributes>
+    <additional_attributes>10;10;150;10</additional_attributes>
+  </element>
+
+  <!-- 2: getProducts -->
+  <element>
+    <id>Relation</id>
+    <coordinates><x>225</x><y>150</y><w>160</w><h>30</h></coordinates>
+    <panel_attributes>lt=->
+2: getProducts()</panel_attributes>
+    <additional_attributes>10;10;150;10</additional_attributes>
+  </element>
+
+  <!-- 3: products list (return) -->
+  <element>
+    <id>Relation</id>
+    <coordinates><x>225</x><y>185</y><w>160</w><h>30</h></coordinates>
+    <panel_attributes>lt=.>
+3: products: List</panel_attributes>
+    <additional_attributes>150;10;10;10</additional_attributes>
+  </element>
+
+  <!-- 4: displayMenu -->
+  <element>
+    <id>Relation</id>
+    <coordinates><x>75</x><y>220</y><w>160</w><h>30</h></coordinates>
+    <panel_attributes>lt=.>
+4: displayMenu(products)</panel_attributes>
+    <additional_attributes>150;10;10;10</additional_attributes>
+  </element>
+
+  <!-- 5: selectItem -->
+  <element>
+    <id>Relation</id>
+    <coordinates><x>75</x><y>255</y><w>160</w><h>30</h></coordinates>
+    <panel_attributes>lt=->
+5: selectItem(itemId, qty)</panel_attributes>
+    <additional_attributes>10;10;150;10</additional_attributes>
+  </element>
+
+  <!-- 6: customise -->
+  <element>
+    <id>Relation</id>
+    <coordinates><x>225</x><y>290</y><w>160</w><h>30</h></coordinates>
+    <panel_attributes>lt=->
+6: customise(options)</panel_attributes>
+    <additional_attributes>10;10;150;10</additional_attributes>
+  </element>
+
+  <!-- 7: createOrder -->
+  <element>
+    <id>Relation</id>
+    <coordinates><x>225</x><y>330</y><w>310</w><h>30</h></coordinates>
+    <panel_attributes>lt=->
+7: createOrder(items)</panel_attributes>
+    <additional_attributes>10;10;300;10</additional_attributes>
+  </element>
+
+  <!-- 8: calculateTotal (self) -->
+  <element>
+    <id>Relation</id>
+    <coordinates><x>525</x><y>365</y><w>80</w><h>40</h></coordinates>
+    <panel_attributes>lt=->
+8: calculateTotal()</panel_attributes>
+    <additional_attributes>10;10;60;10;60;30;10;30</additional_attributes>
+  </element>
+
+  <!-- 9: deductBalance -->
+  <element>
+    <id>Relation</id>
+    <coordinates><x>525</x><y>405</y><w>170</w><h>30</h></coordinates>
+    <panel_attributes>lt=->
+9: deductBalance(amount)</panel_attributes>
+    <additional_attributes>10;10;160;10</additional_attributes>
+  </element>
+
+  <!-- 10: paymentConfirmed (return) -->
+  <element>
+    <id>Relation</id>
+    <coordinates><x>525</x><y>440</y><w>170</w><h>30</h></coordinates>
+    <panel_attributes>lt=.>
+10: paymentConfirmed</panel_attributes>
+    <additional_attributes>160;10;10;10</additional_attributes>
+  </element>
+
+  <!-- 11: submit (self) -->
+  <element>
+    <id>Relation</id>
+    <coordinates><x>525</x><y>475</y><w>80</w><h>40</h></coordinates>
+    <panel_attributes>lt=->
+11: submit()</panel_attributes>
+    <additional_attributes>10;10;60;10;60;30;10;30</additional_attributes>
+  </element>
+
+  <!-- 12: orderConfirmed (return to kiosk) -->
+  <element>
+    <id>Relation</id>
+    <coordinates><x>225</x><y>515</y><w>310</w><h>30</h></coordinates>
+    <panel_attributes>lt=.>
+12: orderConfirmed(orderId)</panel_attributes>
+    <additional_attributes>300;10;10;10</additional_attributes>
+  </element>
+
+  <!-- 13: showConfirmation (return to user) -->
+  <element>
+    <id>Relation</id>
+    <coordinates><x>75</x><y>550</y><w>160</w><h>30</h></coordinates>
+    <panel_attributes>lt=.>
+13: showConfirmation()</panel_attributes>
+    <additional_attributes>150;10;10;10</additional_attributes>
+  </element>
+
+</diagram>
