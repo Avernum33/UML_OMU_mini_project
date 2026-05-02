@@ -35,6 +35,13 @@ Regenerate the SVG images with:
 node tools/render-diagrams.mjs
 ```
 
+## Final Report
+
+The printable final report is available in:
+
+- `docs/omu-final-report.html`
+- `docs/omu-final-report.pdf`
+
 ## Suggested Work Order
 
 1. Read `docs/00-assignment-extract.md`.

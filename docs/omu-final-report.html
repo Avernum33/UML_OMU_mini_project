@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>OMU Mini Project Final Report</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 22mm 18mm 20mm;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            color: #111111;
+            background: #ffffff;
+            font-family: "Times New Roman", Times, serif;
+            font-size: 12pt;
+            line-height: 1.5;
+            text-align: justify;
+        }
+
+        .page {
+            page-break-after: always;
+        }
+
+        .cover {
+            display: flex;
+            min-height: 245mm;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #1f2e3f;
+            line-height: 1.2;
+            text-align: left;
+        }
+
+        h1 {
+            margin: 0 0 20px;
+            font-size: 28pt;
+        }
+
+        h2 {
+            margin: 28px 0 10px;
+            border-bottom: 1px solid #b7c9d6;
+            padding-bottom: 6px;
+            font-size: 17pt;
+        }
+
+        h3 {
+            margin: 18px 0 8px;
+            font-size: 14pt;
+        }
+
+        p {
+            margin: 0 0 10px;
+        }
+
+        ul,
+        ol {
+            margin-top: 6px;
+            padding-left: 22px;
+        }
+
+        li {
+            margin-bottom: 4px;
+        }
+
+        table {
+            width: 100%;
+            margin: 10px 0 16px;
+            border-collapse: collapse;
+            font-size: 10.5pt;
+            text-align: left;
+        }
+
+        th,
+        td {
+            border: 1px solid #cfd8df;
+            padding: 6px 7px;
+            vertical-align: top;
+        }
+
+        th {
+            background: #e8f1f6;
+            color: #1f2e3f;
+            font-weight: bold;
+        }
+
+        code,
+        pre {
+            font-family: "Courier New", monospace;
+            font-size: 10pt;
+        }
+
+        pre {
+            margin: 10px 0 16px;
+            border: 1px solid #cfd8df;
+            border-radius: 6px;
+            padding: 10px;
+            background: #f7f9fb;
+            white-space: pre-wrap;
+            text-align: left;
+        }
+
+        .meta-table {
+            width: 75%;
+            margin: 24px auto;
+            font-size: 12pt;
+        }
+
+        .meta-table th {
+            width: 34%;
+            background: #eef3f7;
+        }
+
+        .toc ol {
+            font-size: 12pt;
+        }
+
+        .status {
+            font-weight: bold;
+        }
+
+        .ok {
+            color: #1f6f43;
+        }
+
+        .partial {
+            color: #8a5a00;
+        }
+
+        .figure {
+            margin: 14px 0 20px;
+            page-break-inside: avoid;
+        }
+
+        .figure img {
+            display: block;
+            width: 100%;
+            max-height: 160mm;
+            border: 1px solid #cfd8df;
+            border-radius: 8px;
+            object-fit: contain;
+            background: #ffffff;
+        }
+
+        .figure.compact img {
+            max-height: 115mm;
+        }
+
+        .caption {
+            margin-top: 6px;
+            color: #4f5f6f;
+            font-size: 10.5pt;
+            text-align: center;
+        }
+
+        .note {
+            border-left: 4px solid #94c5cc;
+            margin: 12px 0 16px;
+            padding: 8px 12px;
+            background: #f4f9fb;
+            text-align: left;
+        }
+
+        .small {
+            font-size: 10.5pt;
+        }
+
+        .diagram-list {
+            columns: 2;
+            column-gap: 30px;
+        }
+    </style>
+</head>
+<body>
+    <section class="cover page">
+        <h1>OMU Mini Project</h1>
+        <h2 style="border: 0; text-align: center;">Final Report</h2>
+        <p><strong>Project Title:</strong> APU Campus Wide Drinks and Snack Ordering Kiosk System</p>
+        <table class="meta-table">
+            <tr>
+                <th>Name and ID</th>
+                <td>[Your Name] - [Your Student ID]</td>
+            </tr>
+            <tr>
+                <th>Intake Code</th>
+                <td>[Your Intake Code]</td>
+            </tr>
+            <tr>
+                <th>Subject</th>
+                <td>Object Modelling with UML</td>
+            </tr>
+            <tr>
+                <th>Submission</th>
+                <td>UML Report and Java Skeletal Implementation</td>
+            </tr>
+        </table>
+        <p class="small">
+            Prepared for the OMU mini project assignment. Personal information should be completed
+            before final submission.
+        </p>
+    </section>
+
+    <section class="page toc">
+        <h2>Table of Contents</h2>
+        <ol>
+            <li>Introduction and Project Plan</li>
+            <li>Analysis and UML Design</li>
+            <li>Design Pattern Refinement</li>
+            <li>Implementation</li>
+            <li>Scenario Walkthrough</li>
+            <li>Compliance Assessment</li>
+            <li>Conclusion and Future Enhancements</li>
+            <li>References</li>
+        </ol>
+        <div class="note">
+            This report follows the same printable report organization as the provided CineRate
+            report. UML diagrams are rendered from the PlantUML sources stored in
+            <code>diagrams/plantuml</code>, with SVG images stored in <code>diagrams/rendered</code>.
+        </div>
+    </section>
+
+    <section>
+        <h2>1. Introduction and Project Plan</h2>
+        <p>
+            Asia Pacific University requires a campus-wide drinks and snack ordering kiosk system
+            for students and staff. The system should reduce queues around the snack booth by
+            allowing users to browse products, customize drinks or snacks, place an order, pay by
+            AP card, and send the confirmed order to the preparation area.
+        </p>
+        <p>
+            The initial deployment includes five kiosks, with a possible expansion to ten kiosks.
+            Because multiple kiosks access the same menu and order system, the design must support
+            centralized product updates, clear separation of responsibilities, and enough
+            concurrency awareness to avoid inconsistent product price or availability data.
+        </p>
+
+        <h3>1.1 Project Objectives</h3>
+        <ul>
+            <li>Model the kiosk ordering scenario using UML use case, class, and sequence diagrams.</li>
+            <li>Design a maintainable object-oriented system for drink and snack ordering.</li>
+            <li>Apply two to three design patterns in a refined class design.</li>
+            <li>Implement the selected patterns in a Java skeletal prototype.</li>
+            <li>Evaluate the chosen patterns and the suitability of the solution.</li>
+        </ul>
+
+        <h3>1.2 Scope and End Users</h3>
+        <p>
+            The primary end users are students and staff who order from kiosks. Snack booth admin
+            staff manage product prices and availability. Preparation staff receive order
+            notifications, while the AP card service identifies users and deducts balances.
+        </p>
+
+        <h3>1.3 Major Functions</h3>
+        <ul>
+            <li>Identify the user and display the current AP card balance.</li>
+            <li>Browse available drinks and snacks.</li>
+            <li>Customize items such as coffee size, sugar, milk, ice, toppings, or sandwich ingredients.</li>
+            <li>Place orders and deduct payment from the AP card balance.</li>
+            <li>Notify the snack booth preparation area.</li>
+            <li>Log kiosk transactions for traceability.</li>
+            <li>Update product prices and availability centrally.</li>
+            <li>Synchronize product updates across all kiosks.</li>
+        </ul>
+    </section>
+
+    <section class="page">
+        <h2>2. Analysis and UML Design</h2>
+        <h3>2.1 Use Case Model</h3>
+        <p>
+            The use case diagram identifies the customer, snack booth admin staff, preparation staff,
+            and AP card service. It shows the main kiosk actions and supporting operations required
+            by the assignment brief.
+        </p>
+        <div class="figure">
+            <img src="../diagrams/rendered/01-use-case.svg" alt="Use case diagram for the OMU kiosk system">
+            <div class="caption">Figure 1. High-level use case diagram for the kiosk ordering system.</div>
+        </div>
+
+        <h3>2.2 Main Use Case Descriptions</h3>
+        <table>
+            <tr>
+                <th>Use Case</th>
+                <th>Description</th>
+                <th>Main Actor</th>
+            </tr>
+            <tr>
+                <td>Identify user</td>
+                <td>The kiosk reads the AP card and obtains user identity and balance.</td>
+                <td>Student / Staff Customer</td>
+            </tr>
+            <tr>
+                <td>Browse drinks and snacks</td>
+                <td>The user views currently available menu products synchronized from the central catalog.</td>
+                <td>Student / Staff Customer</td>
+            </tr>
+            <tr>
+                <td>Customize item</td>
+                <td>The user selects supported options such as size, sugar, ice, toppings, or ingredients.</td>
+                <td>Student / Staff Customer</td>
+            </tr>
+            <tr>
+                <td>Place order</td>
+                <td>The system creates the order, processes payment, logs the transaction, and notifies preparation staff.</td>
+                <td>Student / Staff Customer</td>
+            </tr>
+            <tr>
+                <td>Update product price/availability</td>
+                <td>Admin staff centrally change product data and trigger kiosk synchronization.</td>
+                <td>Snack Booth Admin Staff</td>
+            </tr>
+        </table>
+
+        <h3>2.3 Initial Class Diagram</h3>
+        <p>
+            The initial class diagram models the system before introducing design patterns. Domain
+            classes represent users, AP cards, products, orders, order items, customizations, and
+            transactions. Service classes coordinate kiosk, payment, catalog, logging, and
+            notification responsibilities.
+        </p>
+        <div class="figure">
+            <img src="../diagrams/rendered/02-class-initial.svg" alt="Initial class diagram without design patterns">
+            <div class="caption">Figure 2. Initial class diagram without design patterns.</div>
+        </div>
+    </section>
+
+    <section>
+        <h3>2.4 Sequence Diagrams</h3>
+        <p>
+            Three sequence diagrams describe core runtime behavior. The first covers browsing and
+            customizing an item, the second covers order placement and payment, and the third covers
+            central product updates from the admin system.
+        </p>
+        <div class="figure compact">
+            <img src="../diagrams/rendered/03-sequence-browse-customize.svg" alt="Browse and customize sequence diagram">
+            <div class="caption">Figure 3. Sequence diagram for browsing and customizing an item.</div>
+        </div>
+        <div class="figure compact">
+            <img src="../diagrams/rendered/04-sequence-place-order-payment.svg" alt="Place order and payment sequence diagram">
+            <div class="caption">Figure 4. Sequence diagram for placing and paying for an order.</div>
+        </div>
+        <div class="figure compact">
+            <img src="../diagrams/rendered/05-sequence-admin-update.svg" alt="Admin product update sequence diagram">
+            <div class="caption">Figure 5. Sequence diagram for updating product information centrally.</div>
+        </div>
+    </section>
+
+    <section class="page">
+        <h2>3. Design Pattern Refinement</h2>
+        <p>
+            The refined solution introduces three design patterns that directly support the
+            assignment goals of maintainability, extensibility, and central synchronization.
+        </p>
+
+        <h3>3.1 Selected Patterns</h3>
+        <table>
+            <tr>
+                <th>Pattern</th>
+                <th>Role in the Solution</th>
+                <th>Reason for Selection</th>
+            </tr>
+            <tr>
+                <td>Singleton</td>
+                <td><code>CentralCatalog</code> acts as the single source of truth for product data.</td>
+                <td>Prevents each kiosk from maintaining conflicting product price or availability data.</td>
+            </tr>
+            <tr>
+                <td>Observer</td>
+                <td><code>KioskMenuCache</code> observes catalog changes through <code>CatalogObserver</code>.</td>
+                <td>Allows all kiosks to react to central updates without hard-coding kiosk references.</td>
+            </tr>
+            <tr>
+                <td>Factory Method</td>
+                <td><code>DrinkFactory</code> and <code>SnackFactory</code> create product subtypes.</td>
+                <td>Makes it easier to add new product families or product creation rules later.</td>
+            </tr>
+        </table>
+
+        <h3>3.2 Refined Class Diagram with Patterns</h3>
+        <p>
+            The refined class diagram shows how the design patterns are integrated into the object
+            model. The pattern packages separate product creation, catalog observation, and central
+            catalog access from the main business domain.
+        </p>
+        <div class="figure">
+            <img src="../diagrams/rendered/06-class-refined-patterns.svg" alt="Refined class diagram with design patterns">
+            <div class="caption">Figure 6. Refined class diagram with Singleton, Observer, and Factory Method.</div>
+        </div>
+
+        <h3>3.3 Pattern Interaction Diagrams</h3>
+        <p>
+            The pattern sequence diagrams illustrate how the catalog update, factory creation, and
+            singleton access flows operate at runtime.
+        </p>
+        <div class="figure compact">
+            <img src="../diagrams/rendered/07-sequence-observer-catalog-sync.svg" alt="Observer pattern sequence diagram">
+            <div class="caption">Figure 7. Observer sequence for catalog synchronization.</div>
+        </div>
+        <div class="figure compact">
+            <img src="../diagrams/rendered/08-sequence-factory-product-creation.svg" alt="Factory pattern sequence diagram">
+            <div class="caption">Figure 8. Factory Method sequence for product creation.</div>
+        </div>
+        <div class="figure compact">
+            <img src="../diagrams/rendered/09-sequence-singleton-catalog-access.svg" alt="Singleton pattern sequence diagram">
+            <div class="caption">Figure 9. Singleton sequence for shared catalog access.</div>
+        </div>
+    </section>
+
+    <section class="page">
+        <h2>4. Implementation</h2>
+        <h3>4.1 Technical Structure</h3>
+        <p>
+            The Java implementation is skeletal and focuses on demonstrating the selected design
+            patterns. It has no external runtime dependency and is organized into domain, service,
+            and pattern packages.
+        </p>
+        <pre>src/main/java/omu
+|-- domain
+|   |-- APCard.java
+|   |-- Product.java
+|   |-- Drink.java
+|   |-- Snack.java
+|   |-- Order.java
+|   |-- OrderItem.java
+|   |-- Customization.java
+|   |-- Transaction.java
+|-- patterns
+|   |-- factory
+|   |-- observer
+|   |-- singleton
+|-- service
+|   |-- AdminStaffSystem.java
+|   |-- Kiosk.java
+|   |-- OrderService.java
+|   |-- PaymentService.java
+|   |-- TransactionLogger.java
+|   |-- SnackBoothOrderDisplay.java
+|-- Main.java</pre>
+
+        <h3>4.2 Implemented Pattern Evidence</h3>
+        <table>
+            <tr>
+                <th>Code Area</th>
+                <th>Evidence</th>
+            </tr>
+            <tr>
+                <td><code>patterns/singleton/CentralCatalog.java</code></td>
+                <td>Provides a shared catalog instance and thread-aware product update methods.</td>
+            </tr>
+            <tr>
+                <td><code>patterns/observer</code></td>
+                <td>Defines catalog events and observers so kiosk menu caches can update automatically.</td>
+            </tr>
+            <tr>
+                <td><code>patterns/factory</code></td>
+                <td>Separates drink and snack creation through factory classes and product requests.</td>
+            </tr>
+            <tr>
+                <td><code>service/OrderService.java</code></td>
+                <td>Coordinates order creation, AP card payment, transaction logging, and preparation notification.</td>
+            </tr>
+        </table>
+
+        <h3>4.3 Verification</h3>
+        <p>
+            A simple scenario check is provided in <code>src/test/java/omu/PatternScenarioTest.java</code>.
+            The local environment used during development did not include a JDK, so full compilation
+            could not be executed there. Java syntax was checked using a parser, and the PlantUML
+            diagrams were rendered successfully into SVG images.
+        </p>
+    </section>
+
+    <section>
+        <h2>5. Scenario Walkthrough</h2>
+        <h3>5.1 Customer Ordering Flow</h3>
+        <ol>
+            <li>The customer swipes an AP card and the kiosk identifies the user.</li>
+            <li>The kiosk displays available drinks and snacks from its synchronized menu cache.</li>
+            <li>The customer selects and customizes products.</li>
+            <li>The order service calculates the order total.</li>
+            <li>The payment service deducts the total from the AP card balance.</li>
+            <li>The transaction logger records the payment event.</li>
+            <li>The snack booth display receives the confirmed order for preparation.</li>
+        </ol>
+
+        <h3>5.2 Admin Update Flow</h3>
+        <ol>
+            <li>Snack booth admin staff update a product price or availability status.</li>
+            <li>The admin system saves the change in the central catalog.</li>
+            <li>The central catalog publishes a catalog event.</li>
+            <li>Each kiosk menu cache receives the event and updates its local product snapshot.</li>
+        </ol>
+    </section>
+
+    <section class="page">
+        <h2>6. Compliance Assessment</h2>
+        <table>
+            <tr>
+                <th>Assignment Requirement</th>
+                <th>Status</th>
+                <th>Evidence in This Submission</th>
+            </tr>
+            <tr>
+                <td>High-level use case diagram with supporting descriptions</td>
+                <td class="status ok">Satisfied</td>
+                <td>Figure 1 and section 2.2 provide the use case model and descriptions.</td>
+            </tr>
+            <tr>
+                <td>Class diagram representing the system design</td>
+                <td class="status ok">Satisfied</td>
+                <td>Figure 2 provides the initial class diagram.</td>
+            </tr>
+            <tr>
+                <td>Three sequence diagrams for use cases</td>
+                <td class="status ok">Satisfied</td>
+                <td>Figures 3, 4, and 5 cover browsing/customization, order payment, and admin update.</td>
+            </tr>
+            <tr>
+                <td>Updated class diagram with two to three design patterns</td>
+                <td class="status ok">Satisfied</td>
+                <td>Figure 6 contains Singleton, Observer, and Factory Method.</td>
+            </tr>
+            <tr>
+                <td>Sequence diagrams showing pattern interaction</td>
+                <td class="status ok">Satisfied</td>
+                <td>Figures 7, 8, and 9 show pattern interactions.</td>
+            </tr>
+            <tr>
+                <td>Implement patterns in Java or C++</td>
+                <td class="status ok">Satisfied</td>
+                <td>Java skeleton exists under <code>src/main/java/omu</code>.</td>
+            </tr>
+            <tr>
+                <td>Evaluation of the solution and pattern choices</td>
+                <td class="status ok">Satisfied</td>
+                <td>Sections 3 and 7 discuss the suitability and limitations of the design.</td>
+            </tr>
+            <tr>
+                <td>Report structure and presentation</td>
+                <td class="status partial">Mostly satisfied</td>
+                <td>The report is formatted for A4 printing. Personal cover details still need completion.</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h2>7. Conclusion and Future Enhancements</h2>
+        <p>
+            The proposed design satisfies the major functional requirements of the APU drinks and
+            snack ordering kiosk scenario. It identifies the main actors and use cases, models the
+            system through class and sequence diagrams, and applies suitable object-oriented design
+            patterns to improve maintainability and extensibility.
+        </p>
+        <p>
+            The Singleton central catalog supports one authoritative product source, the Observer
+            pattern supports kiosk synchronization, and Factory Method supports extensible product
+            creation. Together, these patterns directly address the assignment's central concerns:
+            multiple kiosks, central updates, and future menu expansion.
+        </p>
+        <p>
+            Future enhancements would include persistent database storage, a real AP card integration,
+            a kiosk user interface, stronger error recovery for failed order notifications, automated
+            unit tests, and distributed consistency controls for a real multi-kiosk deployment.
+        </p>
+
+        <h2>8. References</h2>
+        <ul>
+            <li>Gamma, E., Helm, R., Johnson, R., and Vlissides, J. <em>Design Patterns: Elements of Reusable Object-Oriented Software</em>.</li>
+            <li>Oracle. (n.d.). <em>Java Platform Documentation</em>. https://docs.oracle.com/en/java/</li>
+            <li>PlantUML. (n.d.). <em>PlantUML Language Reference Guide</em>. https://plantuml.com/</li>
+            <li>Assignment brief: <em>OMU-Assignment-2601.pdf</em>.</li>
+        </ul>
+    </section>
+</body>
+</html>
+
