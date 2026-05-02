@@ -2,46 +2,72 @@
 left to right direction
 skinparam packageStyle rectangle
 skinparam shadowing false
+skinparam linetype ortho
+skinparam ArrowColor #3A3A3A
+skinparam ActorBorderColor #2F3A4A
+skinparam ActorFontColor #1F2937
+skinparam UsecaseBorderColor #4B5563
+skinparam UsecaseBackgroundColor #F8FAFC
+skinparam UsecaseFontColor #111827
+skinparam RectangleBorderColor #94A3B8
+skinparam RectangleBackgroundColor #FFFFFF
+skinparam packageBorderColor #CBD5E1
+skinparam packageBackgroundColor #F8FAFC
+skinparam defaultFontName Arial
+skinparam defaultFontSize 15
 
 actor "Student / Staff\nCustomer" as Customer
 actor "Snack Booth\nAdmin Staff" as Admin
-actor "Preparation\nStaff" as Prep
 actor "AP Card\nService" as CardService
+actor "Preparation\nStaff" as Prep
 
 rectangle "Campus Drinks and Snack Ordering Kiosk System" {
-  usecase "Identify user" as UC1
-  usecase "Browse drinks\nand snacks" as UC2
-  usecase "Customize item" as UC3
-  usecase "Place order" as UC4
-  usecase "Pay by AP card" as UC5
-  usecase "Deduct card\nbalance" as UC6
-  usecase "Notify preparation\narea" as UC7
-  usecase "Log transaction" as UC8
-  usecase "Update product\nprice/availability" as UC9
-  usecase "Synchronize\nkiosks" as UC10
-  usecase "View incoming\norders" as UC11
+  rectangle "Customer kiosk flow" {
+    usecase "Identify\nuser" as UC_IDENT
+    usecase "Browse menu" as UC_BROWSE
+    usecase "Customize\nitem" as UC_CUSTOMIZE
+    usecase "Place\norder" as UC_PLACE
+
+    UC_IDENT -[hidden]down- UC_BROWSE
+    UC_BROWSE -[hidden]down- UC_CUSTOMIZE
+    UC_CUSTOMIZE -[hidden]down- UC_PLACE
+  }
+
+  rectangle "Payment and audit" {
+    usecase "Pay by\nAP card" as UC_PAY
+    usecase "Deduct card\nbalance" as UC_DEDUCT
+    usecase "Log\ntransaction" as UC_LOG
+
+    UC_PAY -[hidden]down- UC_DEDUCT
+    UC_DEDUCT -[hidden]down- UC_LOG
+  }
+
+  rectangle "Snack booth operations" {
+    usecase "Notify\npreparation area" as UC_NOTIFY
+    usecase "View incoming\norders" as UC_VIEW
+    usecase "Update product\nprice/availability" as UC_UPDATE
+    usecase "Synchronize\nkiosks" as UC_SYNC
+
+    UC_NOTIFY -[hidden]down- UC_VIEW
+    UC_UPDATE -[hidden]down- UC_SYNC
+  }
 }
 
-Customer --> UC1
-Customer --> UC2
-Customer --> UC3
-Customer --> UC4
-Customer --> UC5
+Customer -- UC_IDENT
+Customer -- UC_BROWSE
+Customer -- UC_CUSTOMIZE
+Customer -- UC_PLACE
 
-UC4 .> UC1 : <<include>>
-UC4 .> UC3 : <<include>>
-UC4 .> UC5 : <<include>>
-UC4 .> UC7 : <<include>>
-UC4 .> UC8 : <<include>>
-UC5 .> UC6 : <<include>>
+UC_PLACE .> UC_PAY : <<include>>
+UC_PLACE .> UC_NOTIFY : <<include>>
+UC_PLACE .> UC_LOG : <<include>>
+UC_PAY .> UC_DEDUCT : <<include>>
 
-CardService --> UC1
-CardService --> UC6
+UC_IDENT -- CardService
+UC_DEDUCT -- CardService
 
-Admin --> UC9
-UC9 .> UC10 : <<include>>
+Admin -- UC_UPDATE
+UC_UPDATE .> UC_SYNC : <<include>>
 
-Prep --> UC11
-UC7 .> UC11 : <<include>>
+UC_VIEW -- Prep
 @enduml
-
