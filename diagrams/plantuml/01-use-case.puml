@@ -53,11 +53,14 @@ rectangle "Campus Drinks and Snack Ordering Kiosk System" {
   }
 }
 
-Customer -- UC_IDENT
 Customer -- UC_BROWSE
 Customer -- UC_CUSTOMIZE
+Customer -- UC_IDENT
 Customer -- UC_PLACE
+Customer -- UC_PAY
 
+UC_PLACE .> UC_IDENT : <<include>>
+UC_PLACE .> UC_CUSTOMIZE : <<include>>
 UC_PLACE .> UC_PAY : <<include>>
 UC_PLACE .> UC_NOTIFY : <<include>>
 UC_PLACE .> UC_LOG : <<include>>
@@ -67,6 +70,7 @@ UC_IDENT -- CardService
 UC_DEDUCT -- CardService
 
 Admin -- UC_UPDATE
+Admin -- UC_VIEW
 UC_UPDATE .> UC_SYNC : <<include>>
 
 UC_VIEW -- Prep
