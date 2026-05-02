@@ -6,8 +6,10 @@ This repository contains a structured UML and Java skeleton solution for the APU
 
 - `docs/` - assignment extract, requirements analysis, report draft, and validation notes.
 - `diagrams/plantuml/` - UML source files in PlantUML format.
+- `diagrams/rendered/` - rendered SVG images for all UML diagrams.
 - `src/main/java/` - Java skeletal implementation of the selected design patterns.
 - `src/test/java/` - simple executable scenario checks without external test frameworks.
+- `tools/` - repeatable utility scripts.
 
 ## Format Choice
 
@@ -22,6 +24,16 @@ PlantUML (`.puml`) is used instead of `.uxf` because it is easier to review, ver
 - Pattern interaction sequence diagrams.
 - Java skeletal implementation of the design patterns.
 - Report draft with evaluation and critical appraisal.
+
+## Rendered Diagrams
+
+All rendered diagrams are gathered in `docs/all-diagrams.md`.
+
+Regenerate the SVG images with:
+
+```bash
+node tools/render-diagrams.mjs
+```
 
 ## Suggested Work Order
 

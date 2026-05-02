@@ -30,6 +30,8 @@ The system begins with five kiosks but should support future expansion. Product 
 
 Diagram: [`diagrams/plantuml/01-use-case.puml`](../diagrams/plantuml/01-use-case.puml)
 
+Rendered diagram gallery: [`docs/all-diagrams.md`](all-diagrams.md)
+
 ### Main Actors
 
 - Student or staff customer: browses, customizes, orders, and pays.
@@ -150,4 +152,3 @@ The selected patterns are appropriate for the scenario. Singleton centralizes ca
 - Gamma, E., Helm, R., Johnson, R., and Vlissides, J. Design Patterns: Elements of Reusable Object-Oriented Software.
 - Oracle Java documentation for collections, concurrency utilities, and `BigDecimal`.
 - Assignment brief: `OMU-Assignment-2601.pdf`.
-

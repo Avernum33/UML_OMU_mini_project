@@ -2,6 +2,8 @@
 
 These files are the source diagrams for the report.
 
+Rendered images are available in `../rendered`, and the complete image gallery is available in `../../docs/all-diagrams.md`.
+
 ## Files
 
 - `01-use-case.puml` - high-level use case diagram.
@@ -22,3 +24,8 @@ Use a PlantUML plugin or CLI:
 plantuml diagrams/plantuml/*.puml
 ```
 
+Or use the repository script:
+
+```bash
+node tools/render-diagrams.mjs
+```
