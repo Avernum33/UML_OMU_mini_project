@@ -190,11 +190,11 @@
         <table class="meta-table">
             <tr>
                 <th>Name and ID</th>
-                <td>[Your Name] - [Your Student ID]</td>
+                <td>Victor - Student ID to be completed</td>
             </tr>
             <tr>
                 <th>Intake Code</th>
-                <td>[Your Intake Code]</td>
+                <td>To be completed before final submission</td>
             </tr>
             <tr>
                 <th>Subject</th>
@@ -206,8 +206,8 @@
             </tr>
         </table>
         <p class="small">
-            Prepared for the OMU mini project assignment. Personal information should be completed
-            before final submission.
+            Prepared for the OMU mini project assignment. Student ID, intake code, and any group
+            member details should be completed before final submission.
         </p>
     </section>
 
@@ -220,6 +220,7 @@
             <li>Implementation</li>
             <li>Scenario Walkthrough</li>
             <li>Compliance Assessment</li>
+            <li>Critical Appraisal</li>
             <li>Conclusion and Future Enhancements</li>
             <li>References</li>
         </ol>
@@ -296,7 +297,7 @@
             </tr>
             <tr>
                 <td>Identify user</td>
-                <td>The kiosk reads the AP card and obtains user identity and balance.</td>
+                <td>The kiosk reads the AP card, obtains the user's identity, and displays the current balance before ordering.</td>
                 <td>Student / Staff Customer</td>
             </tr>
             <tr>
@@ -315,9 +316,39 @@
                 <td>Student / Staff Customer</td>
             </tr>
             <tr>
+                <td>Pay by AP card</td>
+                <td>The kiosk sends the order total to the payment service and confirms whether the user's AP card can cover the purchase.</td>
+                <td>Student / Staff Customer</td>
+            </tr>
+            <tr>
+                <td>Deduct card balance</td>
+                <td>The AP card service deducts the confirmed order amount and returns the updated balance.</td>
+                <td>AP Card Service</td>
+            </tr>
+            <tr>
+                <td>Notify preparation area</td>
+                <td>After payment succeeds, the order details are sent to the snack booth preparation area.</td>
+                <td>Kiosk System</td>
+            </tr>
+            <tr>
+                <td>Log transaction</td>
+                <td>The kiosk records the payment and order transaction for traceability and later auditing.</td>
+                <td>Kiosk System</td>
+            </tr>
+            <tr>
                 <td>Update product price/availability</td>
                 <td>Admin staff centrally change product data and trigger kiosk synchronization.</td>
                 <td>Snack Booth Admin Staff</td>
+            </tr>
+            <tr>
+                <td>Synchronize kiosks</td>
+                <td>Each kiosk receives the latest central catalog state so menus remain consistent across campus.</td>
+                <td>Central Catalog</td>
+            </tr>
+            <tr>
+                <td>View incoming orders</td>
+                <td>Preparation staff view confirmed orders with product, customization, user, and payment information.</td>
+                <td>Preparation Staff</td>
             </tr>
         </table>
 
@@ -543,18 +574,77 @@
             <tr>
                 <td>Evaluation of the solution and pattern choices</td>
                 <td class="status ok">Satisfied</td>
-                <td>Sections 3 and 7 discuss the suitability and limitations of the design.</td>
+                <td>Sections 3 and 7 discuss pattern suitability, limitations, concurrency, and maintainability.</td>
+            </tr>
+            <tr>
+                <td>Critical appraisal report</td>
+                <td class="status ok">Satisfied</td>
+                <td>Section 7 explicitly evaluates strengths, limitations, risks, and realistic future improvements.</td>
             </tr>
             <tr>
                 <td>Report structure and presentation</td>
                 <td class="status partial">Mostly satisfied</td>
-                <td>The report is formatted for A4 printing. Personal cover details still need completion.</td>
+                <td>The report is formatted for A4 printing. Student ID, intake code, and group member details still need completion.</td>
             </tr>
         </table>
     </section>
 
     <section>
-        <h2>7. Conclusion and Future Enhancements</h2>
+        <h2>7. Critical Appraisal</h2>
+        <h3>7.1 Strengths of the Solution</h3>
+        <p>
+            The main strength of the solution is that it keeps the ordering workflow separated from
+            product creation, catalog synchronization, payment, notification, and transaction
+            logging. This makes the model easier to maintain because a failure in one responsibility
+            can be isolated without reading the whole system. For example, payment issues are
+            concentrated in <code>PaymentService</code> and <code>APCard</code>, while product
+            synchronization is concentrated in <code>CentralCatalog</code> and the observer classes.
+        </p>
+        <p>
+            The design also matches the real scenario well. A central product catalog reflects the
+            requirement that price and availability changes should be made centrally, while kiosk
+            observers reflect the need for updates to affect all kiosk screens.
+        </p>
+
+        <h3>7.2 Suitability of the Design Patterns</h3>
+        <p>
+            The Singleton pattern is suitable for the central catalog because the project needs one
+            authoritative menu source. The Observer pattern is suitable because kiosks should react
+            to catalog updates automatically. The Factory Method pattern is suitable because drinks
+            and snacks have different customization rules and future product families may be added.
+        </p>
+        <p>
+            The patterns are deliberately limited to the parts of the system where they add value.
+            Payment, logging, and notification remain simple services because adding patterns there
+            would increase complexity without improving the assignment solution.
+        </p>
+
+        <h3>7.3 Limitations and Risks</h3>
+        <p>
+            The implementation is intentionally skeletal. It demonstrates the object-oriented design
+            and patterns, but it does not include a real database, a real AP card API, a kiosk user
+            interface, or production-grade deployment. In a live campus environment, the system
+            would need persistent storage, authenticated card access, retry logic for notification
+            failures, and audit logs stored outside kiosk memory.
+        </p>
+        <p>
+            Concurrency is addressed at design level through a central catalog, thread-safe
+            collections, locking, and synchronized card balance deduction. However, a production
+            system would need database transactions or distributed consistency mechanisms to protect
+            against simultaneous orders and catalog updates across different physical kiosk machines.
+        </p>
+
+        <h3>7.4 Balanced Evaluation</h3>
+        <p>
+            Overall, the solution is strong for an UML and pattern-focused mini project. It is
+            maintainable, extensible, and directly connected to the assignment requirements. The
+            biggest weakness is not the design structure, but the prototype depth: it proves the
+            selected patterns rather than delivering a complete production kiosk application.
+        </p>
+    </section>
+
+    <section class="page">
+        <h2>8. Conclusion and Future Enhancements</h2>
         <p>
             The proposed design satisfies the major functional requirements of the APU drinks and
             snack ordering kiosk scenario. It identifies the main actors and use cases, models the
@@ -573,7 +663,7 @@
             unit tests, and distributed consistency controls for a real multi-kiosk deployment.
         </p>
 
-        <h2>8. References</h2>
+        <h2>9. References</h2>
         <ul>
             <li>Gamma, E., Helm, R., Johnson, R., and Vlissides, J. <em>Design Patterns: Elements of Reusable Object-Oriented Software</em>.</li>
             <li>Oracle. (n.d.). <em>Java Platform Documentation</em>. https://docs.oracle.com/en/java/</li>
@@ -583,4 +673,3 @@
     </section>
 </body>
 </html>
-

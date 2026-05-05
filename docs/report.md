@@ -46,10 +46,12 @@ Rendered diagram gallery: [`docs/all-diagrams.md`](all-diagrams.md)
 - Customize item: the customer chooses supported options such as drink size, sugar, milk, ice, toppings, or sandwich ingredients.
 - Place order: the kiosk creates an order from selected items.
 - Pay by AP card: the system deducts the order total from the card balance.
+- Deduct card balance: the AP card service updates the user's remaining credit after successful payment.
 - Notify preparation area: confirmed orders are sent to snack booth staff.
 - Log transaction: the kiosk records the payment and order event.
 - Update product price or availability: admin staff centrally changes menu data.
 - Synchronize kiosks: all kiosk menu caches receive the latest catalog state.
+- View incoming orders: preparation staff view confirmed orders and customization details.
 
 ## 3. Initial Class Diagram
 
@@ -146,6 +148,8 @@ The main limitation is that the implementation is skeletal. A production system 
 Concurrency is considered through thread-safe card deduction, central catalog locks, concurrent maps, and copy-on-write observer lists. However, a real deployment would also need database transactions and distributed consistency controls across kiosk machines.
 
 The selected patterns are appropriate for the scenario. Singleton centralizes catalog state, Observer synchronizes kiosks, and Factory Method supports future product expansion. The design avoids applying patterns where simple services are sufficient.
+
+The solution is intentionally balanced for an UML and design-pattern mini project. It is stronger than a purely diagram-based submission because it includes a Java skeleton that maps to the refined design, but it does not pretend to be a complete production kiosk platform.
 
 ## 9. References
 
