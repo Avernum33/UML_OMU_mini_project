@@ -7,6 +7,7 @@ Module: Object Modelling with UML
 Coursework weight: 30%  
 Implementation language: Java  
 Diagram format: PlantUML  
+Group members: Dubernet Mathieu, Cavaignac Romain, Haegeman Victor  
 
 ## Table of Contents
 
